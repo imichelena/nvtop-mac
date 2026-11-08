@@ -1,0 +1,3 @@
+#!/bin/bash
+# nvtop-mac launcher
+exec "/Users/nano/nvtop-mac/.venv/bin/python" "/Users/nano/nvtop-mac/nvtop.py" "$@"
