@@ -1,3 +1,10 @@
 #!/bin/bash
-# nvtop-mac launcher
-exec "/Users/nano/nvtop-mac/.venv/bin/python" "/Users/nano/nvtop-mac/nvtop.py" "$@"
+# nvtop-mac launcher (self-locating; follows symlinks)
+src="$0"
+while [ -L "$src" ]; do
+    dir="$(cd "$(dirname "$src")" && pwd)"
+    src="$(readlink "$src")"
+    [ "${src#/}" != "$src" ] || src="$dir/$src"
+done
+DIR="$(cd "$(dirname "$src")" && pwd)"
+exec "$DIR/.venv/bin/python" "$DIR/nvtop.py" "$@"

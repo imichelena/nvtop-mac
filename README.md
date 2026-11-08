@@ -3,6 +3,18 @@ nvtop-mac — GPU & inference monitor for Apple Silicon Macs
 
 An nvtop-style TUI for macOS (Apple Silicon). No sudo required.
 
+Install
+-------
+    git clone git@github.com:imichelena/nvtop-mac.git
+    cd nvtop-mac
+    ./install.sh              # checks & installs all dependencies
+    ./install.sh --check-only # audit only, change nothing
+
+install.sh registers the tool's directory in your shell PATH
+(.zprofile/.zshrc or .bash_profile — whichever is writable) and
+links `nvtop` into a writable bin dir when one exists. Source the
+profile or open a new terminal afterwards.
+
 Run:
     nvtop                     # interactive TUI (on PATH via /opt/homebrew/bin)
     nvtop --interval 1        # faster refresh
@@ -29,9 +41,10 @@ Processes — top 15 by CPU or MEM (per-process GPU memory is not
 
 Components
 ----------
+install.sh     checks/installs all dependencies (brew, python, macmon, venv)
 nvtop.py       the app (Python 3.10+, deps: textual, psutil)
-nvtop          launcher (uses the venv below)
-.venv/         venv with textual + psutil
+nvtop          launcher (self-locating, uses the venv below)
+.venv/         venv with textual + psutil (created by install.sh)
 macmon         system dep: brew install macmon  (GPU stats, no sudo)
 
 Notes
